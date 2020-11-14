@@ -5,23 +5,23 @@ import Firebase
 
 struct User {
     
-    var ref: DatabaseReference
-    var id: String
-    var email: String
-    var username: String
-    var nom: String
-    var prenom: String
-    var imageUrl: String
+    let ref: DatabaseReference
+    let id: String
+    let email: String
+    let username: String
+    let nom: String
+    let prenom: String
+    let imageUrl: String
     
-//    init(authData: Firebase.User) {
-//        self.id = authData.uid
-//        self.email = authData.email!
-//    }
-//
-//    init(uid: String, email: String) {
-//        self.id = uid
-//        self.email = email
-//    }
+    init(authData: Firebase.User) {
+        self.id = authData.uid
+        self.email = authData.email!
+    }
+
+    init(uid: String, email: String) {
+        self.id = uid
+        self.email = email
+    }
     
     init(snapshot: DataSnapshot) {
         guard let dict = snapshot.value as? [String: AnyObject] else { return }
@@ -32,12 +32,4 @@ struct User {
         self.nom = dict["nom"] as? String ?? ""
         self.imageUrl = dict["imageUrl"] as? String ?? ""
     }
-}
-
-func toAnyObject() -> Any {
-  return [
-    "name": name,
-    "addedByUser": addedByUser,
-    "completed": completed
-  ]
 }
